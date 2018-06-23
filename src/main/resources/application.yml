@@ -1,0 +1,24 @@
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    healthcheck:
+      enabled: true
+      # 是否向其他注册中心注册 注册中心高可用时设置为true
+    registerWithEureka: false
+      # 是否获取注册表 注册中心高可用时设置为true
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+  # 注册中心自我保护 生产环境注释以下配置
+  server:
+    waitTimeInMsWhenSyncEmpty: 0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream
